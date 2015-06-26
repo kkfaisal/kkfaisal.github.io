@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://kkfaisal.github.io:1313/</loc>
     <lastmod>2015-06-25T14:06:09+05:30</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/first/</loc>
+    <loc>http://kkfaisal.github.io:1313/experiment-hugo-with-github-pages/</loc>
     <lastmod>2015-06-25T14:06:09+05:30</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://kkfaisal.github.io:1313/about/</loc>
     <lastmod>2015-06-25T14:04:56+05:30</lastmod>
   </url>
   
