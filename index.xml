@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Faisal K K</title>
-    <link>http://kkfaisal.github.io:1313/</link>
+    <link>http://kkfaisal.github.io/</link>
     <description>Recent content on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
     <lastBuildDate>Thu, 25 Jun 2015 14:06:09 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kkfaisal.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Experiment Hugo with github pages</title>
-      <link>http://kkfaisal.github.io:1313/experiment-hugo-with-github-pages/</link>
+      <link>http://kkfaisal.github.io/experiment-hugo-with-github-pages/</link>
       <pubDate>Thu, 25 Jun 2015 14:06:09 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/experiment-hugo-with-github-pages/</guid>
+      <guid>http://kkfaisal.github.io/experiment-hugo-with-github-pages/</guid>
       <description>&lt;p&gt;&amp;ldquo;This is test post for checking everything is correct &amp;ldquo;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>about</title>
-      <link>http://kkfaisal.github.io:1313/about/</link>
+      <link>http://kkfaisal.github.io/about/</link>
       <pubDate>Thu, 25 Jun 2015 14:04:56 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/about/</guid>
+      <guid>http://kkfaisal.github.io/about/</guid>
       <description>
 
 &lt;h1 id=&#34;i-imagine-therefore-i-m:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;I imagine therefore I&amp;rsquo;m&lt;/h1&gt;

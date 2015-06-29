@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Faisal K K</title>
-    <link>http://kkfaisal.github.io:1313/post/</link>
+    <link>http://kkfaisal.github.io/post/</link>
     <description>Recent content in Posts on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
     <lastBuildDate>Thu, 25 Jun 2015 14:06:09 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kkfaisal.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Experiment Hugo with github pages</title>
-      <link>http://kkfaisal.github.io:1313/experiment-hugo-with-github-pages/</link>
+      <link>http://kkfaisal.github.io/experiment-hugo-with-github-pages/</link>
       <pubDate>Thu, 25 Jun 2015 14:06:09 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/experiment-hugo-with-github-pages/</guid>
+      <guid>http://kkfaisal.github.io/experiment-hugo-with-github-pages/</guid>
       <description>&lt;p&gt;&amp;ldquo;This is test post for checking everything is correct &amp;ldquo;&lt;/p&gt;
 </description>
     </item>
