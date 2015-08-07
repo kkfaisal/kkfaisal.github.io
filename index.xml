@@ -7,30 +7,60 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
-    <lastBuildDate>Thu, 25 Jun 2015 14:06:09 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2015 14:36:16 +0530</lastBuildDate>
     <atom:link href="http://kkfaisal.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Experiment Hugo with github pages</title>
-      <link>http://kkfaisal.github.io/experiment-hugo-with-github-pages/</link>
-      <pubDate>Thu, 25 Jun 2015 14:06:09 +0530</pubDate>
+      <title>hrcy</title>
+      <link>http://kkfaisal.github.io/post-title/</link>
+      <pubDate>Fri, 07 Aug 2015 14:36:16 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io/experiment-hugo-with-github-pages/</guid>
-      <description>&lt;p&gt;&amp;ldquo;This is test post for checking everything is correct &amp;ldquo;&lt;/p&gt;
+      <guid>http://kkfaisal.github.io/post-title/</guid>
+      <description>
+
+&lt;h1 id=&#34;hierarchical-types:dd30e95f73b111843aada3187172eb9f&#34;&gt;Hierarchical types&lt;/h1&gt;
+
+&lt;p&gt;Type switch in Go is
+&amp;gt;Conside below diagram :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://kkfaisal.github.io/images/img.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;import (
+    &amp;quot;fmt&amp;quot;
+    &amp;quot;time&amp;quot;
+
+    &amp;quot;github.com/fatih/color&amp;quot;
+    &amp;quot;gopkg.in/mgo.v2&amp;quot;
+)
+
+type msin map[string]interface{}
+
+const (
+    localMongo string = &amp;quot;mongodb://localhost:27017&amp;quot;
+)
+
+var (
+    red   = color.New(color.FgRed).PrintfFunc()
+    yel   = color.New(color.FgYellow).PrintfFunc()
+    green = color.New(color.FgGreen).PrintfFunc()
+)
+
+var (
+    url, key string
+    err      error
+    Sessn    *mgo.Session
+    )
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
     <item>
-      <title>about</title>
-      <link>http://kkfaisal.github.io/about/</link>
-      <pubDate>Thu, 25 Jun 2015 14:04:56 +0530</pubDate>
+      <title>Type switch in Go</title>
+      <link>http://kkfaisal.github.io/type-switch-in-go/</link>
+      <pubDate>Thu, 25 Jun 2015 14:06:09 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io/about/</guid>
-      <description>
-
-&lt;h1 id=&#34;i-imagine-therefore-i-m:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;I imagine therefore I&amp;rsquo;m&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;Logic will get you from A to B. Imagination will take you everywhere.&lt;/em&gt;&lt;/p&gt;
+      <guid>http://kkfaisal.github.io/type-switch-in-go/</guid>
+      <description>&lt;p&gt;&amp;rdquo;&amp;rdquo;&lt;/p&gt;
 </description>
     </item>
     

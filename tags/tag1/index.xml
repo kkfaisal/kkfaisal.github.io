@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Faisal K K</title>
-    <link>http://kkfaisal.github.io/post/</link>
-    <description>Recent content in Posts on Faisal K K</description>
+    <title>Tag1 on Faisal K K</title>
+    <link>http://kkfaisal.github.io/tags/tag1/</link>
+    <description>Recent content in Tag1 on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
     <lastBuildDate>Fri, 07 Aug 2015 14:36:16 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kkfaisal.github.io/tags/tag1/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>hrcy</title>
@@ -51,16 +51,6 @@ var (
     Sessn    *mgo.Session
     )
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Type switch in Go</title>
-      <link>http://kkfaisal.github.io/type-switch-in-go/</link>
-      <pubDate>Thu, 25 Jun 2015 14:06:09 +0530</pubDate>
-      
-      <guid>http://kkfaisal.github.io/type-switch-in-go/</guid>
-      <description>&lt;p&gt;&amp;rdquo;&amp;rdquo;&lt;/p&gt;
 </description>
     </item>
     
