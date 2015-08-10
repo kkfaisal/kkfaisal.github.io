@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" Hierarchical types in Go &middot;  Faisal K K" />
+  	<meta property="og:site_name" content="Faisal K K" />
+  	<meta property="og:url" content="http://kkfaisal.github.io/hierarchical-types-in-go/" />
+    
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2015-08-07T14:36:16&#43;05:30" />
+
+    
+    <meta property="og:article:tag" content="Go" />
+    
+    <meta property="og:article:tag" content="types" />
+    
+    
+
+  <title>
+     Hierarchical types in Go &middot;  Faisal K K
+  </title>
+
+    <meta name="description" content="The brick walls are there for a reason. The brick walls are not there to keep us out. The brick walls are there to give us a chance to show how badly we want something. Because the brick walls are there to stop the people who don’t want it badly enough. They’re there to stop the other people." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kkfaisal.github.io/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kkfaisal.github.io/images/apple-touch-icon.png" />
+    
+
+    
+    <link rel="stylesheet" type="text/css" href="http://kkfaisal.github.io/css/screen.css" />
+       <link rel="stylesheet" type="text/css" href="http://kkfaisal.github.io/css/genericons.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kkfaisal.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Faisal K K" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.14" />
+
+    <link rel="canonical" href="http://kkfaisal.github.io/hierarchical-types-in-go/" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79101-12', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/about/">About me</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/kkfaisal">Github repos</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://twitter.com/kkfaisal">Twitter timeline</a>
+            </li>
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kkfaisal.github.io/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kkfaisal.github.io/"><img src="http://kkfaisal.github.io/images/faisalProfile.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Hierarchical types in Go</h1>
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2015-08-07T14:36:16&#43;05:30">
+            Aug 7, 2015
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kkfaisal.github.io/tags/go/">#Go</a></span>
+         
+          <span class="post-tag small"><a href="http://kkfaisal.github.io/tags/types/">#types</a></span>
+         
+        </section>
+    </header>
+  
+    <section class="post-content">
+      <p>Services exposed by a hierarchical data model are node specific.Using those can be dynamic using type switches in Go, without scarifying simplicity.
+Each level is implemented by a set of interfaces which are grouped in a type switch.Further, type switches for all levels can be nested.
+Keeping separate type switch for each level improves code readability</p>
+
+<blockquote>
+<p>To start with, consider below diagram :</p>
+</blockquote>
+
+<p><img src="http://kkfaisal.github.io/images/FinlHrc.png" alt="&quot;Hierarchical types&quot;" title="Hierarchical types" /></p>
+
+<p>Each level in model is implemented by specific set of interfaces.(Each node is has interface in this example):</p>
+
+<p>Interface set for Root :</p>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">type</span> RootInterface <span style="color: #AA22FF; font-weight: bold">interface</span>{
+	RootFunc()
+} 
+</pre></div>
+</p>
+
+<p>Interface set for Level One :</p>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">type</span> L1c1 <span style="color: #AA22FF; font-weight: bold">interface</span>{<span style="color: #008800; font-style: italic">//Level One Child one.</span>
+	L1c1Func()
+}
+</pre></div>
+</p>
+
+<p>Interface set for Level two :</p>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">type</span> L1c2 <span style="color: #AA22FF; font-weight: bold">interface</span>{
+	L1c2Func()
+}
+
+<span style="color: #AA22FF; font-weight: bold">type</span> L1c3 <span style="color: #AA22FF; font-weight: bold">interface</span>{
+	L1c3Func()
+}
+</pre></div>
+</p>
+
+<p>Interface set for Level Three :
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">type</span> L2c1 <span style="color: #AA22FF; font-weight: bold">interface</span> { <span style="color: #008800; font-style: italic">//Level Two Child one.</span>
+	L2c1Func()
+}
+
+<span style="color: #AA22FF; font-weight: bold">type</span> L2c2 <span style="color: #AA22FF; font-weight: bold">interface</span> {
+	L2c2Func()
+}
+
+<span style="color: #AA22FF; font-weight: bold">type</span> L2c3 <span style="color: #AA22FF; font-weight: bold">interface</span> {
+	L2c3Func()
+}
+
+<span style="color: #AA22FF; font-weight: bold">type</span> L2c4 <span style="color: #AA22FF; font-weight: bold">interface</span> {
+	L2c4Func()
+}
+</pre></div>
+</p>
+
+<p>Now a concrete type for a node ,which implements hierarchy interfaces</p>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">type</span> CHildC4 <span style="color: #AA22FF; font-weight: bold">struct</span>{}
+<span style="color: #008800; font-style: italic">//Root-&gt;L1c1-&gt;L2c1</span>
+
+<span style="color: #AA22FF; font-weight: bold">var</span> p = fmt.Println
+
+<span style="color: #AA22FF; font-weight: bold">func</span> (v CHildC4) RootFunc() {
+	p(<span style="color: #BB4444">&quot;Root is satisfied&quot;</span>)
+}
+
+
+<span style="color: #AA22FF; font-weight: bold">func</span> (v CHildC4) L1c1Func() {
+	p(<span style="color: #BB4444">&quot;Level 1 is satisfied&quot;</span>)
+}
+
+<span style="color: #AA22FF; font-weight: bold">func</span> (v CHildC4) L2c1Func() {
+	p(<span style="color: #BB4444">&quot;level 2 is satisfied&quot;</span>)
+}
+</pre></div>
+</p>
+
+<p>In main type switches for each level in hierarchy.Here switches are not nested.</p>
+
+<blockquote>
+<p>Note : No fall through is allowed in type switches</p>
+</blockquote>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">func</span> main() {
+
+	<span style="color: #AA22FF; font-weight: bold">var</span> input <span style="color: #AA22FF; font-weight: bold">interface</span>{}
+
+	input = CHildC4{}
+
+	<span style="color: #008800; font-style: italic">//Switch for root level :</span>
+	<span style="color: #AA22FF; font-weight: bold">switch</span> t <span style="color: #666666">:=</span> input.(<span style="color: #AA22FF; font-weight: bold">type</span>) {
+	<span style="color: #AA22FF; font-weight: bold">case</span> RootInterface:
+		t.RootFunc()
+	<span style="color: #AA22FF; font-weight: bold">default</span>:
+		fmt.Println(<span style="color: #BB4444">&quot;No Root!!&quot;</span>) <span style="color: #008800; font-style: italic">//Error Handling</span>
+		<span style="color: #AA22FF; font-weight: bold">return</span>
+
+	}
+
+	<span style="color: #008800; font-style: italic">//Switch for first level :</span>
+
+	<span style="color: #AA22FF; font-weight: bold">switch</span> t <span style="color: #666666">:=</span> input.(<span style="color: #AA22FF; font-weight: bold">type</span>) {
+	<span style="color: #AA22FF; font-weight: bold">case</span> L1c1:
+		t.L1c1Func()
+	<span style="color: #AA22FF; font-weight: bold">case</span> L1c2:
+		t.L1c2Func()
+	<span style="color: #AA22FF; font-weight: bold">case</span> L1c3:
+		t.L1c3Func()
+	<span style="color: #AA22FF; font-weight: bold">default</span>:
+		fmt.Println(<span style="color: #BB4444">&quot;No Level 1!!&quot;</span>) <span style="color: #008800; font-style: italic">//Error Handling</span>
+		<span style="color: #AA22FF; font-weight: bold">return</span>
+
+	}
+
+	<span style="color: #008800; font-style: italic">//Switch for second level level :</span>
+
+	<span style="color: #AA22FF; font-weight: bold">switch</span> t <span style="color: #666666">:=</span> input.(<span style="color: #AA22FF; font-weight: bold">type</span>) {
+	<span style="color: #AA22FF; font-weight: bold">case</span> L2c1:
+		t.L2c1Func()
+	<span style="color: #AA22FF; font-weight: bold">case</span> L2c2:
+		t.L2c2Func()
+	<span style="color: #AA22FF; font-weight: bold">case</span> L2c3:
+		t.L2c3Func()
+	<span style="color: #AA22FF; font-weight: bold">default</span>:
+		fmt.Println(<span style="color: #BB4444">&quot;No Level 2!!&quot;</span>) <span style="color: #008800; font-style: italic">//Error Handling</span>
+		<span style="color: #AA22FF; font-weight: bold">return</span>
+
+	}
+}
+</pre></div>
+</p>
+
+<p><a href="http://play.golang.org/p/BmVRQrBnXJ">Complete runnable code</a></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kkfaisal.github.io/" style="background-image: url(http://kkfaisal.github.io/images/faisalProfile.jpg)"><span class="hidden">Faisal K K's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kkfaisal.github.io/">Faisal K K</a></h4>
+  
+  <p>Software Engineer,Poet, Open source enthusiast,</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">India</span>
+    
+  </div>
+</section>
+
+
+
+    
+    <section class="share">
+      <h4>Share this post</h4>
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Hierarchical%20types%20in%20Go&amp;url=http%3a%2f%2fkkfaisal.github.io%2fhierarchical-types-in-go%2f"
+          onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+      </a>
+      <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkkfaisal.github.io%2fhierarchical-types-in-go%2f"
+          onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <span class="hidden">Facebook</span>
+      </a>
+      <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkkfaisal.github.io%2fhierarchical-types-in-go%2f"
+         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <span class="hidden">Google+</span>
+      </a>
+    </section>
+    
+
+    
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'kkfaisal';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Faisal K K</a> All rights reserved - 2015</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kkfaisal.github.io/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kkfaisal.github.io/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kkfaisal.github.io/js/index.js"></script>
+
+</body>
+</html>
+

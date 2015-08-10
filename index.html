@@ -146,10 +146,10 @@
         
 <article class="post post">
     <header class="post-header">
-        <h2 class="post-title"><a href="/dotscale-2014-as-a-sketch/">hrcy</a></h2>
+        <h2 class="post-title"><a href="/hierarchical-types-in-go/">Hierarchical types in Go</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>Hierarchical types Type switch in Go is Conside below diagram : 1 package main 2 import ( 3 &quot;fmt&quot; 4 &quot;time&quot; 5 6 &quot;github.com/fatih/color&quot; 7 &quot;gopkg.in/mgo.v2&quot; 8 ) 9 type msin map[string]interface{} 1 const ( 2 localMongo string = &quot;mongodb://localhost:27017&quot; 3 ) 4 5 var ( 6 red = color.New(color.FgRed).PrintfFunc() 7 yel = color.New(color.FgYellow).PrintfFunc() 8 green = color.New(color.FgGreen).PrintfFunc() 9 ) 10 11 var ( 12 url, key string 13 err <a class="read-more" href="/dotscale-2014-as-a-sketch/">&raquo;</a></p>
+        <p>Services exposed by a hierarchical data model are node specific.Using those can be dynamic using type switches in Go, without scarifying simplicity. Each level is implemented by a set of interfaces which are grouped in a type switch.Further, type switches for all levels can be nested. Keeping separate type switch for each level improves code readability To start with, consider below diagram : Each level in model is implemented by specific set of interfaces.(Each node is has interface in this example): Interface set for Root : type RootInterface interface{ RootFunc() } Interface set for Level One : type L1c1 interface{//Level One Child one. <a class="read-more" href="/hierarchical-types-in-go/">&raquo;</a></p>
     </section>
     <footer class="post-meta">
         
@@ -160,39 +160,13 @@
         
         on 
             
-                <a href="http://kkfaisal.github.io/tags/tag1/">#tag1</a>,
+                <a href="http://kkfaisal.github.io/tags/go/">#Go</a>,
             
-                <a href="http://kkfaisal.github.io/tags/tag2/">#tag2</a>,
+                <a href="http://kkfaisal.github.io/tags/types/">#types</a>,
             
         
         <time class="post-date" datetime="2015-08-07T14:36:16&#43;05:30">
             7 Aug 2015
-        </time>
-    </footer>
-</article>
-
-
-
-
-    
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/type-switch-in-go/">Type switch in Go</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>&rdquo;&rdquo; <a class="read-more" href="/type-switch-in-go/">&raquo;</a></p>
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="http://kkfaisal.github.io/images/faisalProfile.jpg" alt="Author image" nopin="nopin" />
-        
-        
-            Faisal K K
-        
-        
-        <time class="post-date" datetime="2015-06-25T14:06:09&#43;05:30">
-            25 Jun 2015
         </time>
     </footer>
 </article>
