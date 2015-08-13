@@ -136,6 +136,38 @@
 	   
 <article class="post post">
     <header class="post-header">
+        <h2 class="post-title"><a href="/post-title/">Semi parallel  for loop in Go</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>Starting with same old sequential for loop.It will iterate through a slice if integers , sum it and print. Note : I&rsquo;m running this on OS X 10.9,Core i5,4GB.Running on playground might give different time elapsed, probably 0. //Setting concurrency to maximum runtime.GOMAXPROCS(runtime.NumCPU()) j, k := 10, 20 var Dat []int //Sample slice i := 0 for i &lt; 10300 { Dat = append(Dat, i) i++ } //1.Simple for loop Start := time.Now() for i := range Dat { fmt.Println(i + j + k) //Iterating through Dat slice, printing sum.(i is from Dat) } log.Println(&quot;Time taken for sequential : &quot;, time.Since(Start)) Here Time taken in my Mac : 12.844223ms Making it parallel (precisely concurrent), using function literals //2.Full parallel loop Start = time.Now() for i := range Dat { go func(i, j, k int) { fmt.Println(i + j + k) }(i, j, k) } log.Println(&quot;Time taken with Concurrent Go routines : &quot;, time.Since(Start)) Time taken : 13.199926ms Slight increase in time, but it will depends on hardwares.What I want to prove is simply using Go routines won&rsquo;t yield maximum throughput. <a class="read-more" href="/post-title/">&raquo;</a></p>
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="http://kkfaisal.github.io/images/faisalProfile.jpg" alt="Author image" nopin="nopin" />
+        
+        
+            Faisal K K
+        
+        on 
+            
+                <a href="http://kkfaisal.github.io/tags/go/">#go</a>,
+            
+                <a href="http://kkfaisal.github.io/tags/concurrency/">#concurrency</a>,
+            
+        
+        <time class="post-date" datetime="2015-08-11T13:03:40&#43;05:30">
+            11 Aug 2015
+        </time>
+    </footer>
+</article>
+
+
+
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
         <h2 class="post-title"><a href="/hierarchical-types-in-go/">Hierarchical types in Go</a></h2>
     </header>
     <section class="post-excerpt">

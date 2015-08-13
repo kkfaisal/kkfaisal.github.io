@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Faisal K K</title>
-    <link>http://kkfaisal.github.io/post/</link>
-    <description>Recent content in Posts on Faisal K K</description>
+    <title>Concurrency on Faisal K K</title>
+    <link>http://kkfaisal.github.io/tags/concurrency/</link>
+    <description>Recent content in Concurrency on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
     <lastBuildDate>Tue, 11 Aug 2015 13:03:40 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kkfaisal.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Semi parallel  for loop in Go</title>
@@ -123,152 +123,6 @@
 &lt;p&gt;&lt;em&gt;I&amp;rsquo;m running it on Sublime Text when log.Println() always after fmt.Priintln(),for Playground ,need scroll down result  to get time printed&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://play.golang.org/p/qzveVPu69N&#34;&gt;Complete runnable code&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hierarchical types in Go</title>
-      <link>http://kkfaisal.github.io/hierarchical-types-in-go/</link>
-      <pubDate>Fri, 07 Aug 2015 14:36:16 +0530</pubDate>
-      
-      <guid>http://kkfaisal.github.io/hierarchical-types-in-go/</guid>
-      <description>&lt;p&gt;Services exposed by a hierarchical data model are node specific.Using those can be dynamic using type switches in Go, without scarifying simplicity.
-Each level is implemented by a set of interfaces which are grouped in a type switch.Further, type switches for all levels can be nested.
-Keeping separate type switch for each level improves code readability&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;To start with, consider below diagram :&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://kkfaisal.github.io/images/FinlHrc.png&#34; alt=&#34;&amp;quot;Hierarchical types&amp;quot;&#34; title=&#34;Hierarchical types&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Each level in model is implemented by specific set of interfaces.(Each node is has interface in this example):&lt;/p&gt;
-
-&lt;p&gt;Interface set for Root :&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; RootInterface &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt;{
-	RootFunc()
-} 
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Interface set for Level One :&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L1c1 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt;{&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Level One Child one.&lt;/span&gt;
-	L1c1Func()
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Interface set for Level two :&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L1c2 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt;{
-	L1c2Func()
-}
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L1c3 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt;{
-	L1c3Func()
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Interface set for Level Three :
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L2c1 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt; { &lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Level Two Child one.&lt;/span&gt;
-	L2c1Func()
-}
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L2c2 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt; {
-	L2c2Func()
-}
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L2c3 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt; {
-	L2c3Func()
-}
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; L2c4 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt; {
-	L2c4Func()
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Now a concrete type for a node ,which implements hierarchy interfaces&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; CHildC4 &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;struct&lt;/span&gt;{}
-&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Root-&amp;gt;L1c1-&amp;gt;L2c1&lt;/span&gt;
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;var&lt;/span&gt; p = fmt.Println
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt; (v CHildC4) RootFunc() {
-	p(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;Root is satisfied&amp;quot;&lt;/span&gt;)
-}
-
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt; (v CHildC4) L1c1Func() {
-	p(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;Level 1 is satisfied&amp;quot;&lt;/span&gt;)
-}
-
-&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt; (v CHildC4) L2c1Func() {
-	p(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;level 2 is satisfied&amp;quot;&lt;/span&gt;)
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;In main type switches for each level in hierarchy.Here switches are not nested.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Note : No fall through is allowed in type switches&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt; main() {
-
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;var&lt;/span&gt; input &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt;{}
-
-	input = CHildC4{}
-
-	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Switch for root level :&lt;/span&gt;
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;switch&lt;/span&gt; t &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; input.(&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt;) {
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; RootInterface:
-		t.RootFunc()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;default&lt;/span&gt;:
-		fmt.Println(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;No Root!!&amp;quot;&lt;/span&gt;) &lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Error Handling&lt;/span&gt;
-		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;return&lt;/span&gt;
-
-	}
-
-	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Switch for first level :&lt;/span&gt;
-
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;switch&lt;/span&gt; t &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; input.(&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt;) {
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; L1c1:
-		t.L1c1Func()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; L1c2:
-		t.L1c2Func()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; L1c3:
-		t.L1c3Func()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;default&lt;/span&gt;:
-		fmt.Println(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;No Level 1!!&amp;quot;&lt;/span&gt;) &lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Error Handling&lt;/span&gt;
-		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;return&lt;/span&gt;
-
-	}
-
-	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Switch for second level level :&lt;/span&gt;
-
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;switch&lt;/span&gt; t &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; input.(&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt;) {
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; L2c1:
-		t.L2c1Func()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; L2c2:
-		t.L2c2Func()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;case&lt;/span&gt; L2c3:
-		t.L2c3Func()
-	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;default&lt;/span&gt;:
-		fmt.Println(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;No Level 2!!&amp;quot;&lt;/span&gt;) &lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Error Handling&lt;/span&gt;
-		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;return&lt;/span&gt;
-
-	}
-}
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://play.golang.org/p/BmVRQrBnXJ&#34;&gt;Complete runnable code&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

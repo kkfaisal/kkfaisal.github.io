@@ -7,8 +7,124 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
-    <lastBuildDate>Fri, 07 Aug 2015 14:36:16 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2015 13:03:40 +0530</lastBuildDate>
     <atom:link href="http://kkfaisal.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Semi parallel  for loop in Go</title>
+      <link>http://kkfaisal.github.io/post-title/</link>
+      <pubDate>Tue, 11 Aug 2015 13:03:40 +0530</pubDate>
+      
+      <guid>http://kkfaisal.github.io/post-title/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://kkfaisal.github.io/images/forfinal.png&#34; alt=&#34;&amp;quot;Hierarchical types&amp;quot;&#34; title=&#34;Hierarchical types&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Starting with same old sequential for loop.It will iterate through a slice if integers , sum it and print.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note :&lt;/em&gt; I&amp;rsquo;m running this on OS X 10.9,Core i5,4GB.Running on playground might give different time elapsed, probably 0.
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Setting concurrency to maximum&lt;/span&gt;
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	j, k &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;20&lt;/span&gt;
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;var&lt;/span&gt; Dat []&lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;
+
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Sample slice&lt;/span&gt;
+	i &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;0&lt;/span&gt;
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; i &amp;lt; &lt;span style=&#34;color: #666666&#34;&gt;10300&lt;/span&gt; {
+		Dat = &lt;span style=&#34;color: #AA22FF&#34;&gt;append&lt;/span&gt;(Dat, i)
+		i&lt;span style=&#34;color: #666666&#34;&gt;++&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//1.Simple for loop&lt;/span&gt;
+	Start &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; time.Now()
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;range&lt;/span&gt; Dat {
+		fmt.Println(i &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; j &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; k) &lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Iterating through Dat slice, printing sum.(i is from Dat)&lt;/span&gt;
+	}
+	log.Println(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;Time taken for sequential : &amp;quot;&lt;/span&gt;, time.Since(Start))
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Here Time taken in my Mac : 12.844223ms&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Making it parallel (precisely concurrent), using function literals&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//2.Full parallel loop&lt;/span&gt;
+	Start = time.Now()
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;range&lt;/span&gt; Dat {
+		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt;(i, j, k &lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;) {
+			fmt.Println(i &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; j &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; k)
+
+		}(i, j, k)
+	}
+
+	log.Println(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;Time taken with Concurrent Go routines : &amp;quot;&lt;/span&gt;, time.Since(Start))
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Time taken  : 13.199926ms&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Slight increase in time, but it will depends on hardwares.What I want to prove is simply using Go routines won&amp;rsquo;t yield maximum throughput.&lt;/p&gt;
+
+&lt;p&gt;Let us move to semi parallel for loop.Concept is to divide data into chunks and use Go routines per chunks :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Part 3 : Semi parallel loop&lt;/span&gt;
+
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//3.1 Calculate index array and chunk size&lt;/span&gt;
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Chunk size is calculated based on how much time is taken for process single unit of data&lt;/span&gt;
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Here value is taken as 1000 ,for demo purpose&lt;/span&gt;
+	chSize &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;1000&lt;/span&gt;
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Creating below index array should be dynamic based on actual array length and chunk size&lt;/span&gt;
+	DevisnResult &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF&#34;&gt;len&lt;/span&gt;(Dat) &lt;span style=&#34;color: #666666&#34;&gt;/&lt;/span&gt; chSize
+	indexes &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; []&lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;{}
+
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;0&lt;/span&gt;; i &amp;lt; DevisnResult; i&lt;span style=&#34;color: #666666&#34;&gt;++&lt;/span&gt; {
+
+		indexes = &lt;span style=&#34;color: #AA22FF&#34;&gt;append&lt;/span&gt;(indexes, i&lt;span style=&#34;color: #666666&#34;&gt;*&lt;/span&gt;chSize)
+
+	}
+
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Actual Data slice length is 10300, index array will be like: [0 1000 2000 3000 4000 5000 6000 7000 8000 9000]&lt;/span&gt;
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//3.2 Loop:&lt;/span&gt;
+	Start = time.Now()
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; _, p &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;range&lt;/span&gt; indexes {
+		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt;(Slc []&lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;, j, k &lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;) {
+			&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;range&lt;/span&gt; Slc {
+				fmt.Println(i &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; j &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; k)
+			}
+
+		}(Dat[p:p&lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt;chSize], j, k)
+
+	}
+
+	&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//here reminder is 300&lt;/span&gt;
+	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;if&lt;/span&gt; DevReminder &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF&#34;&gt;len&lt;/span&gt;(Dat) &lt;span style=&#34;color: #666666&#34;&gt;%&lt;/span&gt; chSize; DevReminder &lt;span style=&#34;color: #666666&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;0&lt;/span&gt; {
+		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;func&lt;/span&gt;(Slc []&lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;, j, k &lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;int&lt;/span&gt;) {
+			&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color: #666666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;range&lt;/span&gt; Slc {
+				fmt.Println(i &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; j &lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt; k)
+			}
+
+		}(Dat[DevisnResult&lt;span style=&#34;color: #666666&#34;&gt;*&lt;/span&gt;chSize:DevisnResult&lt;span style=&#34;color: #666666&#34;&gt;*&lt;/span&gt;chSize&lt;span style=&#34;color: #666666&#34;&gt;+&lt;/span&gt;DevReminder], j, k)
+
+	}
+	log.Println(&lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;Time taken For semi-parallel loop: &amp;quot;&lt;/span&gt;, time.Since(Start))
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Time is  15.217us  -far less than above two-&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Semi parallel for loops ,which is decided dynamically (size of chunk) will get maximum throughput.If data processing requires a merging after processing data(reduce part in map reduce),use&lt;/strong&gt;&lt;strong&gt;semaphore channels and have another parallel merge function.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;I&amp;rsquo;m running it on Sublime Text when log.Println() always after fmt.Priintln(),for Playground ,need scroll down result  to get time printed&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://play.golang.org/p/qzveVPu69N&#34;&gt;Complete runnable code&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hierarchical types in Go</title>
