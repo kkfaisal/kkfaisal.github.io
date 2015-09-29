@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mongodb on Faisal K K</title>
-    <link>http://kkfaisal.github.io:1313/tags/mongodb/</link>
+    <link>http://kkfaisal.github.io/tags/mongodb/</link>
     <description>Recent content in Mongodb on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
     <lastBuildDate>Tue, 29 Sep 2015 14:15:11 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io:1313/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kkfaisal.github.io/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>$let operator and external variables(MongoDB)</title>
-      <link>http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/</link>
+      <link>http://kkfaisal.github.io/let-operator-and-external-variablesmongodb/</link>
       <pubDate>Tue, 29 Sep 2015 14:15:11 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/</guid>
+      <guid>http://kkfaisal.github.io/let-operator-and-external-variablesmongodb/</guid>
       <description>&lt;p&gt;&lt;strong&gt;$let&lt;/strong&gt; Binds variables for use in the specified expression, and returns the result of the expression with Following syntax :&lt;/p&gt;
 
 &lt;blockquote&gt;

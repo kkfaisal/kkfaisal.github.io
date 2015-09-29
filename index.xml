@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Faisal K K</title>
-    <link>http://kkfaisal.github.io:1313/</link>
+    <link>http://kkfaisal.github.io/</link>
     <description>Recent content on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
     <lastBuildDate>Tue, 29 Sep 2015 14:15:11 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kkfaisal.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>$let operator and external variables(MongoDB)</title>
-      <link>http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/</link>
+      <link>http://kkfaisal.github.io/let-operator-and-external-variablesmongodb/</link>
       <pubDate>Tue, 29 Sep 2015 14:15:11 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/</guid>
+      <guid>http://kkfaisal.github.io/let-operator-and-external-variablesmongodb/</guid>
       <description>&lt;p&gt;&lt;strong&gt;$let&lt;/strong&gt; Binds variables for use in the specified expression, and returns the result of the expression with Following syntax :&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -95,10 +95,10 @@ db.grades.aggregate([{
     
     <item>
       <title>Semi parallel  for loop in Go</title>
-      <link>http://kkfaisal.github.io:1313/post-title/</link>
+      <link>http://kkfaisal.github.io/post-title/</link>
       <pubDate>Tue, 11 Aug 2015 13:03:40 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/post-title/</guid>
+      <guid>http://kkfaisal.github.io/post-title/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://kkfaisal.github.io/images/forfinal.png&#34; alt=&#34;&amp;quot;Hierarchical types&amp;quot;&#34; title=&#34;Hierarchical types&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Starting with same old sequential for loop.It will iterate through a slice if integers , sum it and print.&lt;/p&gt;
@@ -211,10 +211,10 @@ db.grades.aggregate([{
     
     <item>
       <title>Hierarchical types in Go</title>
-      <link>http://kkfaisal.github.io:1313/hierarchical-types-in-go/</link>
+      <link>http://kkfaisal.github.io/hierarchical-types-in-go/</link>
       <pubDate>Fri, 07 Aug 2015 14:36:16 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io:1313/hierarchical-types-in-go/</guid>
+      <guid>http://kkfaisal.github.io/hierarchical-types-in-go/</guid>
       <description>&lt;p&gt;Services exposed by a hierarchical data model are node specific.Using those can be dynamic using type switches in Go, without scarifying simplicity.
 Each level is implemented by a set of interfaces which are grouped in a type switch.Further, type switches for all levels can be nested.
 Keeping separate type switch for each level improves code readability&lt;/p&gt;
