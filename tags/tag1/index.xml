@@ -2,60 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tag1 on Faisal K K</title>
-    <link>http://kkfaisal.github.io/tags/tag1/</link>
+    <link>http://localhost:1313/tags/tag1/</link>
     <description>Recent content in Tag1 on Faisal K K</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>All rights reserved - 2015</copyright>
-    <lastBuildDate>Fri, 07 Aug 2015 14:36:16 +0530</lastBuildDate>
-    <atom:link href="http://kkfaisal.github.io/tags/tag1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Sep 2015 14:15:11 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/tag1/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>hrcy</title>
-      <link>http://kkfaisal.github.io/dotscale-2014-as-a-sketch/</link>
-      <pubDate>Fri, 07 Aug 2015 14:36:16 +0530</pubDate>
+      <title>mongo1</title>
+      <link>http://localhost:1313/post-title/</link>
+      <pubDate>Tue, 29 Sep 2015 14:15:11 +0530</pubDate>
       
-      <guid>http://kkfaisal.github.io/dotscale-2014-as-a-sketch/</guid>
-      <description>
-
-&lt;h1 id=&#34;hierarchical-types:dd30e95f73b111843aada3187172eb9f&#34;&gt;Hierarchical types&lt;/h1&gt;
-
-&lt;p&gt;Type switch in Go is&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Conside below diagram :&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://kkfaisal.github.io/images/img.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34; /&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;1 &lt;/span&gt;    &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;package&lt;/span&gt; main
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;2 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;      &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;import&lt;/span&gt; (
-&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;3 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;	    &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
-&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;4 &lt;/span&gt;	    &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;time&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;5 &lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;6 &lt;/span&gt;	   &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;github.com/fatih/color&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;7 &lt;/span&gt;	  &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;gopkg.in/mgo.v2&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;8 &lt;/span&gt;        )   
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;9 &lt;/span&gt;	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;type&lt;/span&gt; msin &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;map&lt;/span&gt;[&lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;string&lt;/span&gt;]&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;interface&lt;/span&gt;{}
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 1 &lt;/span&gt;	&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;const&lt;/span&gt; (
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 2 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;	localMongo &lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;string&lt;/span&gt; = &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;mongodb://localhost:27017&amp;quot;&lt;/span&gt;
-&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 3 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;	)
-&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 4 &lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 5 &lt;/span&gt;		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;var&lt;/span&gt; (
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 6 &lt;/span&gt;		red   = color.New(color.FgRed).PrintfFunc()
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 7 &lt;/span&gt;		yel   = color.New(color.FgYellow).PrintfFunc()
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 8 &lt;/span&gt;		green = color.New(color.FgGreen).PrintfFunc()
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt; 9 &lt;/span&gt;		)		
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;10 &lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;11 &lt;/span&gt;		&lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;var&lt;/span&gt; (
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;12 &lt;/span&gt;		url, key &lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;string&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;13 &lt;/span&gt;		err      &lt;span style=&#34;color: #00BB00; font-weight: bold&#34;&gt;error&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;14 &lt;/span&gt;		Sessn    &lt;span style=&#34;color: #666666&#34;&gt;*&lt;/span&gt;mgo.Session
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;15 &lt;/span&gt;		)
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-</description>
+      <guid>http://localhost:1313/post-title/</guid>
+      <description></description>
     </item>
     
   </channel>

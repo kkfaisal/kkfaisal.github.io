@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mongodb on Faisal K K</title>
+    <link>http://kkfaisal.github.io:1313/tags/mongodb/</link>
+    <description>Recent content in Mongodb on Faisal K K</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All rights reserved - 2015</copyright>
+    <lastBuildDate>Tue, 29 Sep 2015 14:15:11 +0530</lastBuildDate>
+    <atom:link href="http://kkfaisal.github.io:1313/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>$let operator and external variables(MongoDB)</title>
+      <link>http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/</link>
+      <pubDate>Tue, 29 Sep 2015 14:15:11 +0530</pubDate>
+      
+      <guid>http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;$let&lt;/strong&gt; Binds variables for use in the specified expression, and returns the result of the expression with Following syntax :&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;{
+   $let:
+     {
+       vars: { &amp;lt; var1 &amp;gt;: &amp;lt; expression &amp;gt;, &amp;hellip; },
+        in: &amp;lt; expression &amp;gt;
+      }
+  }&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;From MongoDB Manual&lt;/strong&gt; : &lt;em&gt;$let can access variables defined outside its expression block, including system variables.&lt;/em&gt;
+&lt;em&gt;If you modify the values of externally defined variables in the vars block, the new values take effect only in the in expression. Outside of the in expression, the variables retain their previous values.&lt;/em&gt;
+Click &lt;a href=&#34;http://docs.mongodb.org/manual/reference/operator/aggregation/let/&#34;&gt;Here&lt;/a&gt; for more information.&lt;br /&gt;Manual is not clear about how to define the variable  externally? use &lt;em&gt;var&lt;/em&gt; keyword in javascript or any other choice?
+I was also confused when I gone through this operator&amp;rsquo;s description in manual and trying here to give some more clarification on external variable binding in $let.&lt;/p&gt;
+
+&lt;p&gt;There is only limited ways to create a aggregation variable in MongoDB as of now.&lt;strong&gt;Apart form system variables users can only create variables in $let, $redact, $map operations&lt;/strong&gt;.Variables defined in a $map or $redact can be referred within a $let, that is what they meant in MongoDB manual.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;An example of using $map variable in $let :&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;A simple $map operator without $let&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #666666&#34;&gt;&amp;gt;&lt;/span&gt; db.grades.find()
+  { &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;quizzes&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #666666&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;9&lt;/span&gt; ] }
+  { &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;quizzes&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #666666&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;7&lt;/span&gt; ] }
+
+&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Using a simple $map:&lt;/span&gt;
+db.grades.aggregate([{
+  $project&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+    adjustedGrades&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+      $map&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+        input&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;$quizzes&amp;quot;&lt;/span&gt;,
+        as&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;grade&amp;quot;&lt;/span&gt;,
+        &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; { $add&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;$$grade&amp;quot;&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;2&lt;/span&gt; ] }
+      }
+    }
+  }
+}]);
+
+&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Result:&lt;/span&gt;
+{ &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;adjustedGrades&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #666666&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;11&lt;/span&gt; ] }
+{ &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;adjustedGrades&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #666666&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;9&lt;/span&gt; ] }
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Now defining a $let to use variable $$grade defined in this $map:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;db.grades.aggregate([{
+  $project&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+    adjustedGrades&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+      $map&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+        input&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;$quizzes&amp;quot;&lt;/span&gt;,
+        as&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;grade&amp;quot;&lt;/span&gt;,
+        &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+          $let&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; {
+            vars&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; { varin&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;$$grade&amp;quot;&lt;/span&gt; },
+            &lt;span style=&#34;color: #AA22FF; font-weight: bold&#34;&gt;in&lt;/span&gt;&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; { $add&lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;$$varin&amp;quot;&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;4&lt;/span&gt; ] }
+          }
+        }
+      }
+    }
+  }
+}]);
+
+&lt;span style=&#34;color: #008800; font-style: italic&#34;&gt;//Result:&lt;/span&gt;
+{ &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;adjustedGrades&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #666666&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;12&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;13&lt;/span&gt; ] }
+{ &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;_id&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color: #BB4444&#34;&gt;&amp;quot;adjustedGrades&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #666666&#34;&gt;:&lt;/span&gt; [ &lt;span style=&#34;color: #666666&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color: #666666&#34;&gt;11&lt;/span&gt; ] }
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Same way other aggregation variables can be used.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you modify the values of externally defined variables in the vars block, the new values take effect only in the in expression. Outside of the in expression, the variables retain their previous values.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

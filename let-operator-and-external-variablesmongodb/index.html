@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" $let operator and external variables(MongoDB) &middot;  Faisal K K" />
+  	<meta property="og:site_name" content="Faisal K K" />
+  	<meta property="og:url" content="http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/" />
+    
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2015-09-29T14:15:11&#43;05:30" />
+
+    
+    <meta property="og:article:tag" content="MongoDB" />
+    
+    
+
+  <title>
+     $let operator and external variables(MongoDB) &middot;  Faisal K K
+  </title>
+
+    <meta name="description" content="The brick walls are there for a reason. The brick walls are not there to keep us out. The brick walls are there to give us a chance to show how badly we want something. Because the brick walls are there to stop the people who don’t want it badly enough. They’re there to stop the other people." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kkfaisal.github.io:1313/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kkfaisal.github.io:1313/images/apple-touch-icon.png" />
+    
+
+    
+    <link rel="stylesheet" type="text/css" href="http://kkfaisal.github.io:1313/css/screen.css" />
+       <link rel="stylesheet" type="text/css" href="http://kkfaisal.github.io:1313/css/genericons.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kkfaisal.github.io:1313/index.xml" rel="alternate" type="application/rss+xml" title="Faisal K K" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.14" />
+
+    <link rel="canonical" href="http://kkfaisal.github.io:1313/let-operator-and-external-variablesmongodb/" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79101-12', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/about/">About me</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/kkfaisal">Github repos</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://twitter.com/kkfaisal">Twitter timeline</a>
+            </li>
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kkfaisal.github.io:1313/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kkfaisal.github.io:1313/"><img src="http://kkfaisal.github.io:1313/images/faisalProfile.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">$let operator and external variables(MongoDB)</h1>
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2015-09-29T14:15:11&#43;05:30">
+            Sep 29, 2015
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kkfaisal.github.io:1313/tags/mongodb/">#MongoDB</a></span>
+         
+        </section>
+    </header>
+  
+    <section class="post-content">
+      <p><strong>$let</strong> Binds variables for use in the specified expression, and returns the result of the expression with Following syntax :</p>
+
+<blockquote>
+<p>{
+   $let:
+     {
+       vars: { &lt; var1 &gt;: &lt; expression &gt;, &hellip; },
+        in: &lt; expression &gt;
+      }
+  }</p>
+</blockquote>
+
+<p><strong>From MongoDB Manual</strong> : <em>$let can access variables defined outside its expression block, including system variables.</em>
+<em>If you modify the values of externally defined variables in the vars block, the new values take effect only in the in expression. Outside of the in expression, the variables retain their previous values.</em>
+Click <a href="http://docs.mongodb.org/manual/reference/operator/aggregation/let/">Here</a> for more information.<br />Manual is not clear about how to define the variable  externally? use <em>var</em> keyword in javascript or any other choice?
+I was also confused when I gone through this operator&rsquo;s description in manual and trying here to give some more clarification on external variable binding in $let.</p>
+
+<p>There is only limited ways to create a aggregation variable in MongoDB as of now.<strong>Apart form system variables users can only create variables in $let, $redact, $map operations</strong>.Variables defined in a $map or $redact can be referred within a $let, that is what they meant in MongoDB manual.</p>
+
+<p><strong>An example of using $map variable in $let :</strong></p>
+
+<p><em>A simple $map operator without $let</em></p>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;</span> db.grades.find()
+  { <span style="color: #BB4444">&quot;_id&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">3</span>, <span style="color: #BB4444">&quot;quizzes&quot;</span> <span style="color: #666666">:</span> [ <span style="color: #666666">3</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span> ] }
+  { <span style="color: #BB4444">&quot;_id&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">1</span>, <span style="color: #BB4444">&quot;quizzes&quot;</span> <span style="color: #666666">:</span> [ <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">7</span> ] }
+
+<span style="color: #008800; font-style: italic">//Using a simple $map:</span>
+db.grades.aggregate([{
+  $project<span style="color: #666666">:</span> {
+    adjustedGrades<span style="color: #666666">:</span> {
+      $map<span style="color: #666666">:</span> {
+        input<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;$quizzes&quot;</span>,
+        as<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;grade&quot;</span>,
+        <span style="color: #AA22FF; font-weight: bold">in</span><span style="color: #666666">:</span> { $add<span style="color: #666666">:</span> [ <span style="color: #BB4444">&quot;$$grade&quot;</span>, <span style="color: #666666">2</span> ] }
+      }
+    }
+  }
+}]);
+
+<span style="color: #008800; font-style: italic">//Result:</span>
+{ <span style="color: #BB4444">&quot;_id&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">3</span>, <span style="color: #BB4444">&quot;adjustedGrades&quot;</span> <span style="color: #666666">:</span> [ <span style="color: #666666">5</span>, <span style="color: #666666">10</span>, <span style="color: #666666">11</span> ] }
+{ <span style="color: #BB4444">&quot;_id&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">1</span>, <span style="color: #BB4444">&quot;adjustedGrades&quot;</span> <span style="color: #666666">:</span> [ <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span> ] }
+</pre></div>
+</p>
+
+<p><em>Now defining a $let to use variable $$grade defined in this $map:</em></p>
+
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">db.grades.aggregate([{
+  $project<span style="color: #666666">:</span> {
+    adjustedGrades<span style="color: #666666">:</span> {
+      $map<span style="color: #666666">:</span> {
+        input<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;$quizzes&quot;</span>,
+        as<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;grade&quot;</span>,
+        <span style="color: #AA22FF; font-weight: bold">in</span><span style="color: #666666">:</span> {
+          $let<span style="color: #666666">:</span> {
+            vars<span style="color: #666666">:</span> { varin<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;$$grade&quot;</span> },
+            <span style="color: #AA22FF; font-weight: bold">in</span><span style="color: #666666">:</span> { $add<span style="color: #666666">:</span> [ <span style="color: #BB4444">&quot;$$varin&quot;</span>, <span style="color: #666666">4</span> ] }
+          }
+        }
+      }
+    }
+  }
+}]);
+
+<span style="color: #008800; font-style: italic">//Result:</span>
+{ <span style="color: #BB4444">&quot;_id&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">3</span>, <span style="color: #BB4444">&quot;adjustedGrades&quot;</span> <span style="color: #666666">:</span> [ <span style="color: #666666">7</span>, <span style="color: #666666">12</span>, <span style="color: #666666">13</span> ] }
+{ <span style="color: #BB4444">&quot;_id&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">1</span>, <span style="color: #BB4444">&quot;adjustedGrades&quot;</span> <span style="color: #666666">:</span> [ <span style="color: #666666">9</span>, <span style="color: #666666">10</span>, <span style="color: #666666">11</span> ] }
+</pre></div>
+</p>
+
+<p>Same way other aggregation variables can be used.</p>
+
+<p><strong>Note:</strong> If you modify the values of externally defined variables in the vars block, the new values take effect only in the in expression. Outside of the in expression, the variables retain their previous values.</p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kkfaisal.github.io:1313/" style="background-image: url(http://kkfaisal.github.io:1313/images/faisalProfile.jpg)"><span class="hidden">Faisal K K's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kkfaisal.github.io:1313/">Faisal K K</a></h4>
+  
+  <p>Software Engineer,Poet, Open source enthusiast,</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">India</span>
+    
+  </div>
+</section>
+
+
+
+    
+    <section class="share">
+      <h4>Share this post</h4>
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=%24let%20operator%20and%20external%20variables%28MongoDB%29&amp;url=http%3a%2f%2fkkfaisal.github.io%3a1313%2flet-operator-and-external-variablesmongodb%2f"
+          onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+      </a>
+      <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkkfaisal.github.io%3a1313%2flet-operator-and-external-variablesmongodb%2f"
+          onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <span class="hidden">Facebook</span>
+      </a>
+      <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkkfaisal.github.io%3a1313%2flet-operator-and-external-variablesmongodb%2f"
+         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <span class="hidden">Google+</span>
+      </a>
+    </section>
+    
+
+    
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'kkfaisal';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Faisal K K</a> All rights reserved - 2015</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kkfaisal.github.io:1313/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kkfaisal.github.io:1313/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kkfaisal.github.io:1313/js/index.js"></script>
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+
